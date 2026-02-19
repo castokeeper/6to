@@ -38,7 +38,7 @@ export default function BlogScreen() {
             end={{ x: 1, y: 1 }}
             style={styles.headerGradient}
           >
-            <Text style={styles.headerName}>Edgar Venegas - Mi Blog|</Text>
+            <Text style={styles.headerName}>Edgar Venegas - Mi Blog</Text>
             <View style={styles.headerDivider} />
             <Text style={styles.headerSubtitle}>
               Programación — CETIS 120
