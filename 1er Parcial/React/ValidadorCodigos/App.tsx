@@ -1,9 +1,9 @@
-import { useState } from 'react';
+import React, { useState } from 'react';
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, TextInput, View } from 'react-native';
 
-export default function App() {
-  const [password, setPassword] = useState('');
+const App: React.FC = () => {
+  const [password, setPassword] = useState<string>('');
 
   return (
     <View style={styles.container}>
@@ -21,7 +21,7 @@ export default function App() {
           <Text style={styles.successText}>
             ¡Código Correcto! Bienvenido al sistema.
           </Text>
-          <Text style={styles.infoText}>Nombre: Edgar Antonio Venegas Bazan</Text>
+          <Text style={styles.infoText}>Nombre: Edgar Antonio Venegas</Text>
           <Text style={styles.infoText}>Grupo: 6to Programacion</Text>
         </View>
       )}
@@ -29,7 +29,9 @@ export default function App() {
       <StatusBar style="auto" />
     </View>
   );
-}
+};
+
+export default App;
 
 const styles = StyleSheet.create({
   container: {
