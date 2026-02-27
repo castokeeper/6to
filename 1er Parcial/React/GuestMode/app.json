@@ -1,0 +1,21 @@
+{
+  "expo": {
+    "name": "GuestMode",
+    "slug": "GuestMode",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "scheme": "guestmode",
+    "userInterfaceStyle": "automatic",
+    "ios": {
+      "supportsTablet": true,
+      "bundleIdentifier": "com.guestmode.app"
+    },
+    "android": {
+      "package": "com.guestmode.app"
+    },
+    "web": {
+      "output": "single",
+      "favicon": "./assets/images/favicon.png"
+    }
+  }
+}
