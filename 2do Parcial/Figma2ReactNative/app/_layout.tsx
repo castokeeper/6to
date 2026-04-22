@@ -14,9 +14,23 @@ export default function RootLayout() {
 
   return (
     <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
-      <Stack>
+      <Stack
+        screenOptions={{
+          headerStyle: { backgroundColor: '#FFFFFF' },
+          headerTintColor: '#FF6B6B',
+          headerTitleStyle: { fontWeight: 'bold' },
+          headerShadowVisible: false,
+          contentStyle: { backgroundColor: '#F7F7F7' },
+          animation: 'slide_from_right',
+        }}
+      >
         <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
         <Stack.Screen name="modal" options={{ presentation: 'modal', title: 'Modal' }} />
+        {/* Ruta para la pantalla de detalle de post */}
+        <Stack.Screen
+          name="detalle"
+          options={{ title: 'Detalle' }}
+        />
       </Stack>
       <StatusBar style="auto" />
     </ThemeProvider>

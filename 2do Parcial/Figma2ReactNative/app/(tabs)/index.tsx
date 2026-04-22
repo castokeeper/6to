@@ -1,98 +1,223 @@
-import { Image } from 'expo-image';
-import { Platform, StyleSheet } from 'react-native';
+import React, { useState, useMemo } from 'react';
+import {
+  View,
+  Text,
+  FlatList,
+  TextInput,
+  StyleSheet,
+  SafeAreaView,
+  ListRenderItemInfo,
+} from 'react-native';
+import { router } from 'expo-router';
+import { Post } from '@/types';
+import TarjetaPost from '@/components/TarjetaPost';
 
-import { HelloWave } from '@/components/hello-wave';
-import ParallaxScrollView from '@/components/parallax-scroll-view';
-import { ThemedText } from '@/components/themed-text';
-import { ThemedView } from '@/components/themed-view';
-import { Link } from 'expo-router';
+const POSTS: Post[] = [
+  {
+    id: 'p1',
+    petName: 'Luna',
+    especie: '🐱 Gato · Siamés',
+    descripcion: 'Disfrutando del sol de la tarde ☀️ #CatLife',
+    likes: 234,
+    comentarios: 45,
+    timestamp: 'Hace 2 horas',
+    imagen: 'https://images.unsplash.com/photo-1743560769534-1f8abb6acb9a?w=400',
+    isLiked: false,
+  },
+  {
+    id: 'p2',
+    petName: 'Rocky',
+    especie: '🐕 Perro · Corgi',
+    descripcion: '¡Día en el parque! 🌳 Me encanta correr por el césped',
+    likes: 567,
+    comentarios: 89,
+    timestamp: 'Hace 5 horas',
+    imagen: 'https://images.unsplash.com/photo-1654995159231-91401633f72e?w=400',
+    isLiked: true,
+  },
+  {
+    id: 'p3',
+    petName: 'Bella',
+    especie: '🐕 Perro · Labrador',
+    descripcion: 'Primera vez en la playa 🌊 ¡Qué felicidad!',
+    likes: 892,
+    comentarios: 156,
+    timestamp: 'Hace 1 día',
+    imagen: 'https://images.unsplash.com/photo-1667516837506-c13f487e58bf?w=400',
+    isLiked: true,
+  },
+  {
+    id: 'p4',
+    petName: 'Milo',
+    especie: '🐱 Gato · Persa',
+    descripcion: 'Siesta de la tarde... no molestar 😴',
+    likes: 445,
+    comentarios: 67,
+    timestamp: 'Hace 2 días',
+    imagen: 'https://images.unsplash.com/photo-1735618603118-89e26b0dcf6e?w=400',
+    isLiked: false,
+  },
+  {
+    id: 'p5',
+    petName: 'Max',
+    especie: '🐕 Perro · Golden Retriever',
+    descripcion: '¡Nueva pelota! Es mi día favorito 🎾',
+    likes: 678,
+    comentarios: 92,
+    timestamp: 'Hace 3 días',
+    imagen: 'https://images.unsplash.com/photo-1719292606971-0916fc62f5b0?w=400',
+    isLiked: false,
+  },
+  {
+    id: 'p6',
+    petName: 'Rocky',
+    especie: '🐕 Perro · Corgi',
+    descripcion: 'Jugando con mi hermano cachorro 🐾',
+    likes: 1234,
+    comentarios: 234,
+    timestamp: 'Hace 4 días',
+    imagen: 'https://images.unsplash.com/photo-1760204473280-6d04fb55b5e2?w=400',
+    isLiked: true,
+  },
+];
 
-export default function HomeScreen() {
+export default function FeedScreen() {
+  const [filtro, setFiltro] = useState<string>('');
+
+  const postsFiltrados = useMemo<Post[]>(
+    () =>
+      POSTS.filter(
+        (p) =>
+          p.petName.toLowerCase().includes(filtro.toLowerCase()) ||
+          p.descripcion.toLowerCase().includes(filtro.toLowerCase())
+      ),
+    [filtro]
+  );
+
+  const handlePressTarjeta = (post: Post): void => {
+    router.push({
+      pathname: '/detalle',
+      params: { post: JSON.stringify(post) },
+    });
+  };
+
+  const renderItem = ({ item }: ListRenderItemInfo<Post>) => (
+    <TarjetaPost post={item} onPress={() => handlePressTarjeta(item)} />
+  );
+
   return (
-    <ParallaxScrollView
-      headerBackgroundColor={{ light: '#A1CEDC', dark: '#1D3D47' }}
-      headerImage={
-        <Image
-          source={require('@/assets/images/partial-react-logo.png')}
-          style={styles.reactLogo}
-        />
-      }>
-      <ThemedView style={styles.titleContainer}>
-        <ThemedText type="title">Welcome!</ThemedText>
-        <HelloWave />
-      </ThemedView>
-      <ThemedView style={styles.stepContainer}>
-        <ThemedText type="subtitle">Step 1: Try it</ThemedText>
-        <ThemedText>
-          Edit <ThemedText type="defaultSemiBold">app/(tabs)/index.tsx</ThemedText> to see changes.
-          Press{' '}
-          <ThemedText type="defaultSemiBold">
-            {Platform.select({
-              ios: 'cmd + d',
-              android: 'cmd + m',
-              web: 'F12',
-            })}
-          </ThemedText>{' '}
-          to open developer tools.
-        </ThemedText>
-      </ThemedView>
-      <ThemedView style={styles.stepContainer}>
-        <Link href="/modal">
-          <Link.Trigger>
-            <ThemedText type="subtitle">Step 2: Explore</ThemedText>
-          </Link.Trigger>
-          <Link.Preview />
-          <Link.Menu>
-            <Link.MenuAction title="Action" icon="cube" onPress={() => alert('Action pressed')} />
-            <Link.MenuAction
-              title="Share"
-              icon="square.and.arrow.up"
-              onPress={() => alert('Share pressed')}
-            />
-            <Link.Menu title="More" icon="ellipsis">
-              <Link.MenuAction
-                title="Delete"
-                icon="trash"
-                destructive
-                onPress={() => alert('Delete pressed')}
-              />
-            </Link.Menu>
-          </Link.Menu>
-        </Link>
+    <SafeAreaView style={styles.container}>
+      <View style={styles.headerBar}>
+        <Text style={styles.headerTitle}>🐾 Pawsome</Text>
+        <Text style={styles.headerSub}>Red Social para Mascotas</Text>
+      </View>
 
-        <ThemedText>
-          {`Tap the Explore tab to learn more about what's included in this starter app.`}
-        </ThemedText>
-      </ThemedView>
-      <ThemedView style={styles.stepContainer}>
-        <ThemedText type="subtitle">Step 3: Get a fresh start</ThemedText>
-        <ThemedText>
-          {`When you're ready, run `}
-          <ThemedText type="defaultSemiBold">npm run reset-project</ThemedText> to get a fresh{' '}
-          <ThemedText type="defaultSemiBold">app</ThemedText> directory. This will move the current{' '}
-          <ThemedText type="defaultSemiBold">app</ThemedText> to{' '}
-          <ThemedText type="defaultSemiBold">app-example</ThemedText>.
-        </ThemedText>
-      </ThemedView>
-    </ParallaxScrollView>
+      <View style={styles.searchBar}>
+        <Text style={styles.searchIcon}>🔍</Text>
+        <TextInput
+          style={styles.searchInput}
+          placeholder="Busca mascotas o publicaciones..."
+          placeholderTextColor="#95A5A6"
+          value={filtro}
+          onChangeText={setFiltro}
+          clearButtonMode="while-editing"
+        />
+      </View>
+
+      <Text style={styles.contador}>
+        {postsFiltrados.length}{' '}
+        {postsFiltrados.length === 1 ? 'publicación' : 'publicaciones'}
+      </Text>
+
+      <FlatList<Post>
+        data={postsFiltrados}
+        keyExtractor={(item) => item.id}
+        renderItem={renderItem}
+        contentContainerStyle={styles.lista}
+        showsVerticalScrollIndicator={false}
+        ListEmptyComponent={
+          <View style={styles.emptyContainer}>
+            <Text style={styles.emptyIcon}>🐾</Text>
+            <Text style={styles.emptyText}>No hay resultados para "{filtro}"</Text>
+          </View>
+        }
+      />
+    </SafeAreaView>
   );
 }
 
 const styles = StyleSheet.create({
-  titleContainer: {
+  container: {
+    flex: 1,
+    backgroundColor: '#F7F7F7',
+  },
+  headerBar: {
+    backgroundColor: '#FFFFFF',
+    paddingHorizontal: 20,
+    paddingTop: 16,
+    paddingBottom: 12,
+    borderBottomWidth: 1,
+    borderColor: '#F0F0F0',
+  },
+  headerTitle: {
+    fontSize: 24,
+    fontWeight: 'bold',
+    color: '#FF6B6B',
+  },
+  headerSub: {
+    fontSize: 12,
+    color: '#95A5A6',
+    marginTop: 2,
+  },
+  searchBar: {
     flexDirection: 'row',
     alignItems: 'center',
-    gap: 8,
+    backgroundColor: '#FFFFFF',
+    marginHorizontal: 16,
+    marginTop: 12,
+    marginBottom: 4,
+    borderRadius: 14,
+    paddingHorizontal: 14,
+    paddingVertical: 10,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 1 },
+    shadowOpacity: 0.06,
+    shadowRadius: 4,
+    elevation: 2,
   },
-  stepContainer: {
-    gap: 8,
+  searchIcon: {
+    fontSize: 16,
+    marginRight: 8,
+  },
+  searchInput: {
+    flex: 1,
+    fontSize: 15,
+    color: '#2C3E50',
+  },
+  contador: {
+    fontSize: 12,
+    color: '#95A5A6',
+    marginHorizontal: 20,
     marginBottom: 8,
+    marginTop: 4,
   },
-  reactLogo: {
-    height: 178,
-    width: 290,
-    bottom: 0,
-    left: 0,
-    position: 'absolute',
+  lista: {
+    paddingHorizontal: 16,
+    paddingBottom: 24,
+    paddingTop: 8,
+  },
+  emptyContainer: {
+    alignItems: 'center',
+    paddingTop: 60,
+  },
+  emptyIcon: {
+    fontSize: 48,
+    marginBottom: 12,
+  },
+  emptyText: {
+    fontSize: 15,
+    color: '#95A5A6',
+    textAlign: 'center',
+    paddingHorizontal: 32,
   },
 });
