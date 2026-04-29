@@ -1,16 +1,13 @@
 import { useEffect, useState } from 'react';
 import { Pressable, StyleSheet } from 'react-native';
-import { useNavigation } from 'expo-router';
-import { useRoute } from '@react-navigation/native';
+import { router, useLocalSearchParams } from 'expo-router';
 
 import { ThemedText } from '@/components/themed-text';
 import { ThemedView } from '@/components/themed-view';
 
 export default function PantallaPrincipal() {
-  const navigation = useNavigation();
-  const route = useRoute();
   const [nombreUsuario, setNombreUsuario] = useState('Juan');
-  const { nombreActual } = (route.params as { nombreActual?: string }) ?? {};
+  const { nombreActual } = useLocalSearchParams<{ nombreActual?: string }>();
 
   useEffect(() => {
     if (typeof nombreActual === 'string' && nombreActual.length > 0) {
@@ -19,9 +16,10 @@ export default function PantallaPrincipal() {
   }, [nombreActual]);
 
   const abrirEditorPerfil = () => {
-    navigation.navigate('modal' as never, {
+    router.push({
+      pathname: '/modal',
       nombreActual: nombreUsuario,
-    } as never);
+    });
   };
 
   return (

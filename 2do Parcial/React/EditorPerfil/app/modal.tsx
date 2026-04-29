@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { StyleSheet, TextInput, Pressable } from 'react-native';
-import { useNavigation, useRoute } from '@react-navigation/native';
+import { router, useLocalSearchParams } from 'expo-router';
 
 import { ThemedText } from '@/components/themed-text';
 import { ThemedView } from '@/components/themed-view';
@@ -10,9 +10,7 @@ type RouteParams = {
 };
 
 export default function EditorPerfil() {
-  const navigation = useNavigation();
-  const route = useRoute();
-  const { nombreActual = 'Juan' } = (route.params as RouteParams) ?? {};
+  const { nombreActual = 'Juan' } = useLocalSearchParams<RouteParams>();
   const [nombreNuevo, setNombreNuevo] = useState(nombreActual);
 
   useEffect(() => {
@@ -20,14 +18,10 @@ export default function EditorPerfil() {
   }, [nombreActual]);
 
   const manejarGuardado = () => {
-    if (typeof (navigation as any).popTo === 'function') {
-      (navigation as any).popTo('index', { nombreActual: nombreNuevo });
-      return;
-    }
-    navigation.navigate('(tabs)' as never, {
-      screen: 'index',
+    router.replace({
+      pathname: '/(tabs)',
       params: { nombreActual: nombreNuevo },
-    } as never);
+    });
   };
 
   return (
