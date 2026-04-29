@@ -4,6 +4,7 @@ import { router, useLocalSearchParams } from 'expo-router';
 
 import { ThemedText } from '@/components/themed-text';
 import { ThemedView } from '@/components/themed-view';
+import { useThemeColor } from '@/hooks/use-theme-color';
 
 type RouteParams = {
   nombreActual?: string;
@@ -12,6 +13,9 @@ type RouteParams = {
 export default function EditorPerfil() {
   const { nombreActual = 'Juan' } = useLocalSearchParams<RouteParams>();
   const [nombreNuevo, setNombreNuevo] = useState(nombreActual);
+  const textColor = useThemeColor({}, 'text');
+  const backgroundColor = useThemeColor({}, 'background');
+  const placeholderColor = useThemeColor({ light: '#687076', dark: '#9BA1A6' }, 'icon');
 
   useEffect(() => {
     setNombreNuevo(nombreActual);
@@ -31,7 +35,15 @@ export default function EditorPerfil() {
         value={nombreNuevo}
         onChangeText={setNombreNuevo}
         placeholder="Escribe un nuevo nombre"
-        style={styles.input}
+        placeholderTextColor={placeholderColor}
+        style={[
+          styles.input,
+          {
+            color: textColor,
+            borderColor: placeholderColor,
+            backgroundColor,
+          },
+        ]}
       />
       <Pressable onPress={manejarGuardado} style={styles.button}>
         <ThemedText type="defaultSemiBold">Guardar</ThemedText>
