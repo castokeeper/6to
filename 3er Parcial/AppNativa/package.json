@@ -24,5 +24,6 @@
   "private": true,
   "devDependencies": {
     "babel-preset-expo": "^55.0.22"
-  }
+  },
+  "packageManager": "pnpm@11.1.3"
 }
