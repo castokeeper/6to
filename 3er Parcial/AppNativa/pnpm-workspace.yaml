@@ -1,4 +1,0 @@
-allowBuilds:
-  dtrace-provider: false
-minimumReleaseAgeExclude:
-  - babel-preset-expo@55.0.22
