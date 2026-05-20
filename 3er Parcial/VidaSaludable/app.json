@@ -1,0 +1,31 @@
+{
+  "expo": {
+    "name": "VidaSaludable",
+    "slug": "vidasaludable",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/icon.png",
+    "userInterfaceStyle": "light",
+    "splash": {
+      "backgroundColor": "#2B6E3F",
+      "resizeMode": "contain"
+    },
+    "android": {
+      "adaptiveIcon": {
+        "backgroundColor": "#2B6E3F"
+      },
+      "package": "com.vidasaludable.app"
+    },
+    "ios": {
+      "bundleIdentifier": "com.vidasaludable.app"
+    },
+    "plugins": [
+      "expo-asset"
+    ],
+    "extra": {
+      "eas": {
+        "projectId": "3982096d-b0e7-4018-8455-fb40ec590e7d"
+      }
+    }
+  }
+}
