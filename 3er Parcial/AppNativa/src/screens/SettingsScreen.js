@@ -110,7 +110,6 @@ export default function SettingsScreen({ route, navigation }) {
       </View>
 
       <ScrollView style={styles.scrollContent} showsVerticalScrollIndicator={false}>
-        {/* Sección: Cuenta */}
         <Text style={styles.sectionTitle}>Cuenta</Text>
         <SettingItem
           icono="👤"
@@ -129,7 +128,6 @@ export default function SettingsScreen({ route, navigation }) {
           <Text style={styles.chevron}>›</Text>
         </SettingItem>
 
-        {/* Sección: Preferencias */}
         <Text style={[styles.sectionTitle, styles.sectionTitleMargin]}>Preferencias</Text>
         <SettingItem icono="🌙" titulo="Tema Oscuro" subtitulo="Apariencia de la aplicación">
           <Switch
@@ -148,12 +146,10 @@ export default function SettingsScreen({ route, navigation }) {
           />
         </SettingItem>
 
-        {/* Sección: Info */}
         <Text style={[styles.sectionTitle, styles.sectionTitleMargin]}>Información</Text>
         <SettingItem icono="📱" titulo="Versión" subtitulo="TechConnect v1.0.0" />
         <SettingItem icono="⚡" titulo="Tecnologías" subtitulo="React Native · Expo · SQLite" />
 
-        {/* Acciones */}
         <Text style={[styles.sectionTitle, styles.sectionTitleMargin]}>Sesión</Text>
         <TouchableOpacity
           style={styles.logoutButton}

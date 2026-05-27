@@ -140,7 +140,6 @@ export default function HomeScreen({ route, navigation }) {
 
   return (
     <SafeAreaView style={styles.container}>
-      {/* Header */}
       <View style={styles.header}>
         <View style={styles.headerTop}>
           <View>
@@ -178,7 +177,6 @@ export default function HomeScreen({ route, navigation }) {
         </View>
       </View>
 
-      {/* Filtros */}
       <View style={styles.filtersContainer}>
         <FlatList
           horizontal
@@ -205,7 +203,6 @@ export default function HomeScreen({ route, navigation }) {
         />
       </View>
 
-      {/* Lista de publicaciones */}
       <FlatList
         data={publicacionesFiltradas}
         renderItem={renderPublicacion}
@@ -221,7 +218,6 @@ export default function HomeScreen({ route, navigation }) {
         }
       />
 
-      {/* FAB - Nuevo Post */}
       <TouchableOpacity
         style={styles.fab}
         onPress={() => setModalVisible(true)}
@@ -230,7 +226,6 @@ export default function HomeScreen({ route, navigation }) {
         <Text style={styles.fabText}>+</Text>
       </TouchableOpacity>
 
-      {/* Modal Nueva Publicación */}
       <Modal visible={modalVisible} animationType="slide" transparent>
         <View style={styles.modalOverlay}>
           <View style={styles.modalContent}>

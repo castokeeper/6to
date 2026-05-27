@@ -60,7 +60,6 @@ export default function RegisterScreen({ navigation }) {
               <Text style={styles.subtitle}>Únete a la comunidad tech</Text>
             </View>
 
-            {/* Selector de Avatar */}
             <View style={styles.avatarSection}>
               <Text style={styles.label}>Elige tu avatar</Text>
               <ScrollView horizontal showsHorizontalScrollIndicator={false}>

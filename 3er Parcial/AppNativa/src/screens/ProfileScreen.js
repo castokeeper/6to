@@ -82,7 +82,6 @@ export default function ProfileScreen({ route, navigation }) {
   return (
     <SafeAreaView style={styles.container}>
       <ScrollView showsVerticalScrollIndicator={false}>
-        {/* Banner */}
         <View style={styles.banner}>
           <TouchableOpacity
             onPress={() => navigation.goBack()}
@@ -92,7 +91,6 @@ export default function ProfileScreen({ route, navigation }) {
           </TouchableOpacity>
         </View>
 
-        {/* Foto y datos */}
         <View style={styles.profileInfoContainer}>
           <View style={styles.avatarContainer}>
             <Text style={styles.avatarText}>{usuario.avatar || '👤'}</Text>
@@ -103,7 +101,6 @@ export default function ProfileScreen({ route, navigation }) {
             {usuario.bio || 'Sin biografía'}
           </Text>
 
-          {/* Stats */}
           <View style={styles.statsContainer}>
             <View style={styles.statItem}>
               <Text style={styles.statValue}>{publicaciones.length}</Text>
@@ -125,7 +122,6 @@ export default function ProfileScreen({ route, navigation }) {
           </TouchableOpacity>
         </View>
 
-        {/* Publicaciones del usuario */}
         <View style={styles.postsContainer}>
           <Text style={styles.postsTitle}>Mis Publicaciones</Text>
           {publicaciones.length === 0 ? (
@@ -160,7 +156,6 @@ export default function ProfileScreen({ route, navigation }) {
         </View>
       </ScrollView>
 
-      {/* Modal Editar Perfil */}
       <Modal visible={editando} animationType="slide" transparent>
         <View style={styles.modalOverlay}>
           <View style={styles.modalContent}>

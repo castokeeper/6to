@@ -76,7 +76,6 @@ export default function ExploreScreen({ route, navigation }) {
         />
       </View>
 
-      {/* Categorías */}
       <View style={styles.categoriesContainer}>
         <Text style={styles.categoriesLabel}>Categorías</Text>
         <View style={styles.categoriesList}>
@@ -101,7 +100,6 @@ export default function ExploreScreen({ route, navigation }) {
         </View>
       </View>
 
-      {/* Resultados */}
       <FlatList
         data={resultados}
         keyExtractor={(item) => item.id.toString()}
