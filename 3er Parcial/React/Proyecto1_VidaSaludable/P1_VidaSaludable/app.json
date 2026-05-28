@@ -1,0 +1,28 @@
+{
+  "expo": {
+    "name": "P1 VidaSaludable",
+    "slug": "p1-vidasaludable",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/icon.png",
+    "userInterfaceStyle": "light",
+    "newArchEnabled": false,
+    "splash": {
+      "backgroundColor": "#4CAF50"
+    },
+    "ios": {
+      "supportsTablet": true,
+      "bundleIdentifier": "com.vidasaludable.p1"
+    },
+    "android": {
+      "adaptiveIcon": {
+        "backgroundColor": "#4CAF50"
+      },
+      "package": "com.vidasaludable.p1"
+    },
+    "web": {
+      "favicon": "./assets/favicon.png"
+    },
+    "platforms": ["ios", "android"]
+  }
+}
